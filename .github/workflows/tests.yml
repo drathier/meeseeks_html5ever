@@ -61,30 +61,6 @@ jobs:
           otp-version: ${{ matrix.otp }}
           elixir-version: ${{ matrix.elixir }}
 
-      - name: Retrieve cached Rust dependencies
-        uses: actions/cache@v2
-        id: cargo-cache
-        with:
-          path: ~/.cargo
-          key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-cargo-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-             ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-cargo-
-      - name: Retrieve cached Elixir dependencies
-        uses: actions/cache@v2
-        id: mix-cache
-        with:
-          path: deps
-          key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-
-      - name: Retrieve cached Elixir build
-        uses: actions/cache@v2
-        id: build-cache
-        with:
-          path: _build
-          key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-build-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-build-
       - name: Install Elixir dependencies
         if: steps.mix-cache.outputs.cache-hit != 'true'
         run: |
