@@ -26,7 +26,7 @@ defmodule MeeseeksHtml5ever.Mixfile do
 
   defp deps do
     [
-      {:rustler, git: "https://github.com/drathier/rustler", branch: "master"},
+      {:rustler, "~> 0.22.2", git: "https://github.com/drathier/rustler", branch: "master"},
 
       # docs
       {:ex_doc, "~> 0.21.0", only: :docs, runtime: false}
